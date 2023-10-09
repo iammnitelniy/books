@@ -1,27 +1,17 @@
-# React + TypeScript + Vite
+React + TypeScript + Vite + RTK
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+‘ункционал
 
-Currently, two official plugins are available:
+ƒолжны быть текстовое поле и кнопка поиска. ѕо введенной пользователем подстроке производитс€ поиск книг. “риггером к поиску €вл€етс€ либо нажатие Enter (когда текстовое поле в фокусе), либо нажатие кнопки поиска.
+‘ильтраци€ по категори€м. Ќиже текстового пол€ располагаетс€ селект с категори€ми: all, art, biography, computers, history, medical, poetry. ≈сли выбрано "all" (выбрано изначально), то поиск производитс€ по всем категори€м.
+—ортировка. –€дом с селектом категорий находитс€ селект с вариантами сортировки: relevance (выбран изначально), newest.
+Ќайденные книги отображаютс€ карточками, кажда€ из которых состоит из изображени€ обложки книги, названи€ книги, названи€ категории и имен авторов. ≈сли дл€ книги приходит несколько категорий, то отображаетс€ только перва€. јвторы отображаютс€ все. ≈сли не приходит какой-либо части данных, то вместо нее просто пустое место.
+Ќад блоком с карточками отображаетс€ количество найденных по запросу книг.
+ѕагинаци€ реализована по принципу 'load more'. Ќиже блока с карточками находитс€ кнопка 'Load more', по клику на нее к уже загруженным книгам подгружаютс€ еще. Ўаг пагинации - 30.
+ѕри клике на карточку происходит переход на детальную страницу книги, на которой вывод€тс€ ее данные: изображение обложки, название, все категории, все авторы, описание.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
