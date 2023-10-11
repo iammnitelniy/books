@@ -1,14 +1,18 @@
-import './App.css'
-import Books from "../features/Books";
+import "./App.css";
+
+import {GlobalStyles} from "../common/styles/StyledComponents.tsx";
+import {Books} from "../features/Books/ui/Books.tsx";
 
 function App() {
-
-
   return (
     <>
-    <Books />
+        <GlobalStyles>
+
+            <Books />
+
+        </GlobalStyles>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

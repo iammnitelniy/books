@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import {bookSearchSlice} from "../features/Header/model/bookSearch.slice.ts";
 
 
 export const store = configureStore({
   reducer: {
-
+    books: bookSearchSlice,
   },
 });
 
