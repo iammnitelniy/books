@@ -1,23 +1,23 @@
 import {Search} from "../../../common/styles/StyledComponents.tsx";
-import {ChangeEvent, FC, KeyboardEvent, useState} from "react";
+import {ChangeEvent, FC, KeyboardEvent} from "react";
 import {headerThunks} from "../model/bookSearch.slice.ts";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch.ts";
 
 type PropsType = {
-
+    setSearch: (search: string) => void
+    search: string
 }
 
-export const Searcher: FC<PropsType> = () => {
+export const Searcher: FC<PropsType> = ({search, setSearch}) => {
 
     const dispatch = useAppDispatch();
 
 
-    const [search, setSearch] = useState("");
 
     const searchBook = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
 
-            dispatch(headerThunks.fetchBooks({search, maxResults: '30'}))
+            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0'}))
 
 
         }

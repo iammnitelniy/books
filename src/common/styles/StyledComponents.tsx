@@ -6,33 +6,33 @@ export const GlobalStyles = styled.div`
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif;
+    
   }
+  
   :root {
     --primary-color: #755139ff;
     --secondary-color: #d4b996ff;
   }
  
 `;
-
 export const StyledHeader = styled.header`
+  flex-grow: 0;
   width: 100%;
   height: 300px;
-  background-color: var(--primary-color); /* Измените фон на основной цвет */
+  background-color: var(--primary-color);
   color: var(--secondary-color);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Улучшенная тень */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
- 
-  
+  position: absolute; 
+  top: 0; 
 
   &::before {
     content: "";
     top: 0;
     left: 0;
     width: 100%;
-    //background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    //background-size: cover; /* Заполнение изображения по размеру */
     z-index: -1;
   }
 `;
@@ -87,24 +87,22 @@ export const Search = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 65%;
-  margin: 0 auto;
-  margin-top: 25px;
+  margin-top: 300px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  box-sizing: border-box;
 `;
 
 export const CardStyle = styled.div`
-  background-color: var(--secondary-color);
-  border-radius: 1rem;
-  padding: 0.5rem;
-  margin-bottom: 10px;
-  box-shadow: 0 5px 5px rgba(212, 185, 150, 0.5);
-  transition: 0.5s;
-  text-align: center;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 500px;
+  min-height: 150px;
+  background-color: #e9e9e9;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   &:hover {
     transform: scale(0.9);
@@ -112,30 +110,18 @@ export const CardStyle = styled.div`
   }
 
   img {
+    max-width: 250px;
     width: 100%;
-    height: 200px;
-    border-radius: 1rem 1rem 0 0;
   }
 
   .bottom {
     display: flex;
     flex-direction: column;
-
+    align-items: flex-start;
     .title {
-      font-size: 14px;
-      margin-bottom: 32px;
-    }
-
-    .amount {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-      background-color: var(--primary-color);
-      color: var(--secondary-color);
-      font-size: 13px;
-      font-weight: bold;
-      padding: 0.2rem;
+      margin-bottom: 15px;
+      font-size: 25px;
+      font-weight: 600;
     }
   }
 `;

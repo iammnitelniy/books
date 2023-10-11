@@ -2,19 +2,35 @@ import {instance} from "../../../common/api/common.api.ts";
 
 export const headerApi = {
     getBooks(arg: getBooksArgType) {
-        debugger
-        return instance.get<any>(`?q=${arg.search}&maxResults=${arg.maxResults}`);
+        return instance.get<BooksDomainType>(`?q=${arg.search}&maxResults=${arg.maxResults}&startIndex=${arg.startIndex}`);
     },
 }
-export type BooksDomainType = [
+export type BooksDomainType = {
+    totalItems: number
+    items: SearchBook[]
+    startIndex?: string;
+}
 
-]
+type volumeInfoType = {
+    title: string
+    authors: string[]
+    description: string
+    categories: string[]
+    imageLinks: ImageSizeType
+}
 
-export type BookType = {
+type ImageSizeType = {
+    smallThumbnail: string
+    thumbnail: string
+}
 
+export type SearchBook = {
+    id: string
+    volumeInfo: volumeInfoType
 }
 
 export type getBooksArgType = {
     search: string,
-    maxResults: string
+    maxResults: string,
+    startIndex: string
 }
