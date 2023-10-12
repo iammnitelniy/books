@@ -54,6 +54,11 @@ const Card: FC<PropsType> = () => {
             </>
           );
         }
+        else {
+          return <>
+          NOT FOUNDED CARD
+          </>
+        }
       })}
     </>
   );

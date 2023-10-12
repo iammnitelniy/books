@@ -17,6 +17,7 @@ type volumeInfoType = {
     description: string
     categories: string[]
     imageLinks: ImageSizeType
+    publishedDate: string
 }
 
 type ImageSizeType = {

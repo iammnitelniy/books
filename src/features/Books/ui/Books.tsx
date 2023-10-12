@@ -11,6 +11,8 @@ export const Books = () => {
     const [search, setSearch] = useState("");
     const dispatch = useAppDispatch();
     const books = useSelector((state: AppRootStateType) => state.books)
+    console.log(books.items[1]?.volumeInfo.publishedDate)
+    console.log(books.items[1]?.volumeInfo.categories)
 
     const textTotalCount = books.totalItems ? `Found ${books.totalItems} results` : `For this request no books were found`;
 
@@ -23,7 +25,7 @@ export const Books = () => {
           <Card />
       </Container>
         <button onClick={() => {
-            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: (books.items?.length + 1).toString()}))
+            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: (books.items?.length).toString()}))
 
 
         }}>Load more</button>
