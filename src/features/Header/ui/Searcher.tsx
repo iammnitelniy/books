@@ -2,24 +2,30 @@ import {Search} from "../../../common/styles/StyledComponents.tsx";
 import {ChangeEvent, FC, KeyboardEvent} from "react";
 import {headerThunks} from "../model/bookSearch.slice.ts";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch.ts";
+import {BooksSortsType, CategoriesType} from "../../Books/ui/Books.tsx";
 
 type PropsType = {
     setSearch: (search: string) => void
     search: string
+    setCategory:(value: CategoriesType) => void
+    setSortBy: (value: BooksSortsType ) => void
 }
 
-export const Searcher: FC<PropsType> = ({search, setSearch}) => {
+export const Searcher: FC<PropsType> = ({search, setSearch, setSortBy, setCategory}) => {
 
     const dispatch = useAppDispatch();
 
-
+const onButtonSearchDispatch = () => {
+    dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: 'all', order: "relevance"}))
+    setSortBy('relevance')
+    setCategory('all')
+    setSearch('')
+}
 
     const searchBook = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
 
-            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: '', order: "relevance"}))
-
-
+            onButtonSearchDispatch()
 
         }
     };
@@ -35,8 +41,7 @@ export const Searcher: FC<PropsType> = ({search, setSearch}) => {
                 }
                 onKeyDown={searchBook}
             />
-            <button onClick={()=> {dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: '', order: "relevance"}))
-            }}>
+            <button onClick={()=> {onButtonSearchDispatch()}}>
                Search
             </button>
 

@@ -4,7 +4,6 @@ export const headerApi = {
     getBooks(arg: Partial<getBooksArgType>) {
        const {search, filter, maxResults, startIndex, order} = arg
         const category = filter === 'all' ? "" : filter
-        debugger
         return instance.get<BooksDomainType>(`?q=${search}+subject:${category}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=${order}`);
     },
 }
@@ -15,12 +14,12 @@ export type BooksDomainType = {
 }
 
 type volumeInfoType = {
-    title: string
-    authors: string[]
-    description: string
-    categories: string[]
-    imageLinks: ImageSizeType
-    publishedDate: string
+    title?: string
+    authors?: string[]
+    description?: string
+    categories?: string[]
+    imageLinks?: ImageSizeType
+    publishedDate?: string
 }
 
 type ImageSizeType = {

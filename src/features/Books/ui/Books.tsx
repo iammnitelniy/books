@@ -1,4 +1,4 @@
-import {Container} from "../../../common/styles/StyledComponents.tsx";
+import {Container, HeaderContainer, SelectContainer} from "../../../common/styles/StyledComponents.tsx";
 import {Header} from "../../Header/ui/Header.tsx";
 import {useState} from "react";
 import {headerThunks} from "../../Header/model/bookSearch.slice.ts";
@@ -8,8 +8,8 @@ import {AppRootStateType} from "../../../app/store.ts";
 import {Cards} from "./Cards.tsx";
 import {SuperSelect} from "../../../common/components/SuperSelect.tsx";
 
-type CategoriesType = 'all'| 'Art'| 'Biography'| 'Computers'| 'History'| 'Medical'| 'Poetry'
-type BooksSortsType = 'newest' | 'relevance'
+export type CategoriesType = 'all'| 'Art'| 'Biography'| 'Computers'| 'History'| 'Medical'| 'Poetry'
+export type BooksSortsType = 'newest' | 'relevance'
 
 export const Books = () => {
     const [search, setSearch] = useState("");
@@ -37,45 +37,43 @@ export const Books = () => {
     }
 
 
-    console.log(booksDomain)
-
-  //  const filteredCategoriesBooks = books?.filter((cd) => category === 'All' ? books : cd?.volumeInfo?.categories?.[0] !== category )
-
 
   return (
-    <>
-        <div>
-            <Header setSearch={setSearch} search={search}/>
+    <div>
+        <HeaderContainer>
+            <Header setSearch={setSearch} search={search} setCategory={setCategory} setSortBy={setSortby}></Header>
 
-        </div>
-        <span>{textTotalCount}</span>
-
-        <div>
-
-
-
-
-            <Container>
-             {/*{books.length !== 0}*/}
+            {books.length !== 0 &&
+                <SelectContainer>
+                    <div>{textTotalCount}</div>
                     <SuperSelect options={sortsOptions} value={sortBy} callBack={(value: string) => onChangeSortHandler(value)} />
                     <SuperSelect options={selectOptions} value={category} callBack={(value: string) => onChangeSelectCategoryHandler(value)} />
+                </SelectContainer>
+
+            }
+        </HeaderContainer>
 
 
+        <div>
 
+            <Container>
 
-
-                <Cards books={books}/>
+                <Cards books={books} />
             </Container>
+
+
+            {books.length !== 0 &&
+
             <button onClick={() => {
-                dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: (books?.length).toString(), filter: category, order: "0"}))
+                dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: (books?.length).toString(), filter: category, order: sortBy}))
 
 
-            }}>Load more</button>
+            }}>Load more</button> }
 
 
         </div>
 
-    </>
+    </div>
   );
 };
 

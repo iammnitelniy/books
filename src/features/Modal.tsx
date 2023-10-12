@@ -1,9 +1,9 @@
 import { FC } from "react";
-import {Overlay, OverlayInner} from "../common/styles/StyledComponents.tsx";
+import {CloseButton, Overlay, OverlayInner} from "../common/styles/StyledComponents.tsx";
 type PropsType = {
-  show: any;
+  show: boolean;
   item: any;
-  onClose: any;
+  onClose: () => void;
 };
 
 const Modal: FC<PropsType> = ({ show, item, onClose }) => {
@@ -16,9 +16,7 @@ const Modal: FC<PropsType> = ({ show, item, onClose }) => {
     <>
       <Overlay>
         <OverlayInner>
-          <button className="close" onClick={onClose}>
-            <i className="fas fa-times"></i>
-          </button>
+          <CloseButton onClick={onClose} />
           <div className="inner-box">
             <img src={thumbnail} alt="" />
             <div className="info">

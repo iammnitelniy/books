@@ -10,8 +10,8 @@ type Props = {
 
 export const CardWithModel: FC<Props> = ({item, bookExample}) => {
 
-    const [show, setShow] = useState(false);
-    const [bookItem, setItem] = useState<SearchBook>();
+    const [show, setShow] = useState<boolean>(false);
+    const [bookItem, setItem] = useState<SearchBook>({id: '1', volumeInfo: {title: ''}});
 
     return (
         <>

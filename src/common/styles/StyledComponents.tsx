@@ -1,40 +1,54 @@
 import styled from "styled-components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 
 export const GlobalStyles = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Poppins:wght@300&display=swap");
+
   * {
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif;
-    
+
   }
-  
+
   :root {
     --primary-color: #755139ff;
     --secondary-color: #d4b996ff;
   }
- 
+
 `;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+  justify-content: center;
+  align-content: flex-start;
+`
+export const SelectContainer = styled.div`
+  height: 10vh;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+`
 export const StyledHeader = styled.header`
-  flex-grow: 0;
   width: 100%;
-  height: 300px;
+  height: 50vh;
   background-color: var(--primary-color);
   color: var(--secondary-color);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute; 
-  top: 0; 
+  justify-content: center;
+  position: absolute;
 
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-  }
+
+
+
 `;
 
 export const Row2 = styled.div`
@@ -47,6 +61,7 @@ export const Row2 = styled.div`
     margin-top: 20px;
     margin-bottom: 15px;
   }
+
   img {
     margin-top: 30px;
     width: 250px;
@@ -70,8 +85,6 @@ export const Search = styled.div`
   input {
     outline: 0;
     border: 0;
-    width: 350px;
-    height: 35px;
     padding: 0 0.5rem;
     font-size: 15px;
     font-weight: bold;
@@ -81,16 +94,17 @@ export const Search = styled.div`
     background-color: #535bf2;
     outline: none;
     border: none;
-    height: 35px;
     padding: 0 0.5rem;
   }
 `;
-
 export const Container = styled.div`
-  margin-top: 300px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 2em;
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const CardStyle = styled.div`
@@ -99,11 +113,11 @@ export const CardStyle = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  max-height: 500px;
-  min-height: 150px;
   background-color: #e9e9e9;
-  padding: 20px;
+  padding: 2em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+
 
   &:hover {
     transform: scale(0.9);
@@ -111,22 +125,25 @@ export const CardStyle = styled.div`
   }
 
   img {
-    max-width: 250px;
-    width: 100%;
+    max-width: 100%;
+    max-height: 200px;
   }
 
   .bottom {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    @media (max-width: 800px) {
+      display: none;
+    }
+
     .title {
       margin-bottom: 15px;
-      font-size: 25px;
+      font-size: 20px; /* Уменьшил размер шрифта заголовка */
       font-weight: 600;
     }
   }
 `;
-
 export const Overlay = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -143,12 +160,14 @@ export const Overlay = styled.div`
 
 export const OverlayInner = styled.div`
   background: white;
-  width: 700px;
-  height: 550px;
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  max-height: 100vh;
   padding: 1.5rem;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: auto;
   font-size: 1.3rem;
 
   .close {
@@ -164,12 +183,13 @@ export const OverlayInner = styled.div`
   .inner-box {
     margin-top: 30px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 
     img {
-      margin-right: 20px;
-      width: 150px;
-      height: 200px;
+      margin: 0 auto;
+      width: 100%;
+      max-height: 400px;
+      image-rendering: high-quality;
     }
 
     h3 {
@@ -190,6 +210,7 @@ export const OverlayInner = styled.div`
       color: white;
       font-weight: bold;
       padding: 0.3rem 0.5rem;
+      margin: 10px 0;
     }
   }
 
@@ -199,3 +220,22 @@ export const OverlayInner = styled.div`
     font-size: 13px;
   }
 `;
+
+const CloseIcon = styled(FontAwesomeIcon)`
+  margin-left: 90%;
+  font-size: 24px;
+  color: var(--secondary-color);
+  transition: color 0.3s; 
+  cursor: pointer;
+
+  &:hover {
+    color: #755139ff; 
+  }
+`;
+
+export const CloseButton: React.FC<{ onClick: () => void }> = ({onClick}) => {
+    return (
+        <CloseIcon icon={faTimes} onClick={onClick}/>
+    );
+};
+
