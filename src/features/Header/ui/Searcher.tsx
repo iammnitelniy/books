@@ -17,7 +17,8 @@ export const Searcher: FC<PropsType> = ({search, setSearch}) => {
     const searchBook = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
 
-            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0'}))
+            dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: '', order: "relevance"}))
+
 
 
         }
@@ -34,9 +35,10 @@ export const Searcher: FC<PropsType> = ({search, setSearch}) => {
                 }
                 onKeyDown={searchBook}
             />
-            {/*<button onClick={searchBook}>*/}
-            {/*   Search*/}
-            {/*</button>*/}
+            <button onClick={()=> {dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: '', order: "relevance"}))
+            }}>
+               Search
+            </button>
 
         </Search>
     );

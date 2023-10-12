@@ -15,8 +15,8 @@ export const Header: FC<PropsType> = ({search, setSearch}) => {
         <StyledHeader>
             <Row1>
                 <h1>
-                    A room without books is like
-                    <br /> a body without a soul.
+                    Everyone will find theirs
+
                 </h1>
             </Row1>
             <Row2>

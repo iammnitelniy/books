@@ -97,7 +97,8 @@ export const CardStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   max-height: 500px;
   min-height: 150px;
   background-color: #e9e9e9;

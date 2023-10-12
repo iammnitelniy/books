@@ -1,8 +1,11 @@
 import {instance} from "../../../common/api/common.api.ts";
 
 export const headerApi = {
-    getBooks(arg: getBooksArgType) {
-        return instance.get<BooksDomainType>(`?q=${arg.search}&maxResults=${arg.maxResults}&startIndex=${arg.startIndex}`);
+    getBooks(arg: Partial<getBooksArgType>) {
+       const {search, filter, maxResults, startIndex, order} = arg
+        const category = filter === 'all' ? "" : filter
+        debugger
+        return instance.get<BooksDomainType>(`?q=${search}+subject:${category}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=${order}`);
     },
 }
 export type BooksDomainType = {
@@ -34,4 +37,6 @@ export type getBooksArgType = {
     search: string,
     maxResults: string,
     startIndex: string
+    filter: string
+    order: string
 }
