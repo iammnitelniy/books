@@ -1,4 +1,4 @@
-import {Container, HeaderContainer, SelectContainer} from "../../../common/styles/StyledComponents.tsx";
+import {Container, Content, HeaderContainer, SelectContainer} from "../../../common/styles/StyledComponents.tsx";
 import {Header} from "../../Header/ui/Header.tsx";
 import {useState} from "react";
 import {headerThunks} from "../../Header/model/bookSearch.slice.ts";
@@ -7,6 +7,9 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store.ts";
 import {Cards} from "./Cards.tsx";
 import {SuperSelect} from "../../../common/components/SuperSelect.tsx";
+import {ButtonUniversal} from "../../../common/components/ButtonUniversal.tsx";
+import {LinearLoader} from "../../../common/components/LinearLoader.tsx";
+import {selectAppStatus} from "../../../app/app.selectors.ts";
 
 export type CategoriesType = 'all'| 'Art'| 'Biography'| 'Computers'| 'History'| 'Medical'| 'Poetry'
 export type BooksSortsType = 'newest' | 'relevance'
@@ -22,19 +25,22 @@ export const Books = () => {
     const selectOptions = categories.map((el) => ({ value: el, label: el }));
     const [category, setCategory] = useState<CategoriesType>("all")
     const [sortBy, setSortby] = useState<BooksSortsType>('relevance')
+    const status = useSelector(selectAppStatus);
 
 
 
     const onChangeSelectCategoryHandler = (value: string) => {
         setCategory(value as CategoriesType)
-       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: value, order: sortBy}))
+       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: sortBy}))
 
     }
     const onChangeSortHandler = (value: string) => {
         setSortby(value as BooksSortsType)
-       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: value as BooksSortsType}))
+       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: sortBy as BooksSortsType}))
 
     }
+
+const afterSearch = books.length !== 0
 
 
 
@@ -43,7 +49,7 @@ export const Books = () => {
         <HeaderContainer>
             <Header setSearch={setSearch} search={search} setCategory={setCategory} setSortBy={setSortby}></Header>
 
-            {books.length !== 0 &&
+            {afterSearch &&
                 <SelectContainer>
                     <div>{textTotalCount}</div>
                     <SuperSelect options={sortsOptions} value={sortBy} callBack={(value: string) => onChangeSortHandler(value)} />
@@ -54,7 +60,8 @@ export const Books = () => {
         </HeaderContainer>
 
 
-        <div>
+        <Content>
+            {status === "loading" && <LinearLoader />}
 
             <Container>
 
@@ -62,16 +69,15 @@ export const Books = () => {
             </Container>
 
 
-            {books.length !== 0 &&
+            {afterSearch &&
 
-            <button onClick={() => {
+            <ButtonUniversal disabled={!afterSearch} callBack={() => {
                 dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: (books?.length).toString(), filter: category, order: sortBy}))
 
+            }} name={'Load more'}/>}
 
-            }}>Load more</button> }
 
-
-        </div>
+        </Content>
 
     </div>
   );

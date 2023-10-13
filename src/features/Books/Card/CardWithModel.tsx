@@ -16,7 +16,8 @@ export const CardWithModel: FC<Props> = ({item, bookExample}) => {
     return (
         <>
             <CardStyle >
-                <div onClick={() => {
+                <div className={'cardBox'}
+                    onClick={() => {
                     setShow(true);
                     setItem(item);
                 }}

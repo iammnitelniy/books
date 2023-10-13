@@ -1,16 +1,14 @@
 import "./App.css";
-
-import {GlobalStyles} from "../common/styles/StyledComponents.tsx";
 import {Books} from "../features/Books/ui/Books.tsx";
+import {GlobalStyle} from "../common/styles/StyledComponents.tsx";
 
 function App() {
   return (
     <>
-        <GlobalStyles>
+        <GlobalStyle/>
 
             <Books />
 
-        </GlobalStyles>
     </>
   );
 }

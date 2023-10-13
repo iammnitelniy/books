@@ -2,14 +2,23 @@ import {createSlice} from "@reduxjs/toolkit";
 import {BooksDomainType, getBooksArgType, headerApi} from "../api/header.api.ts";
 import {createAppAsyncThunk} from "../../../common/utils/create-app-async-thunk.ts";
 import {thunkTryCatch} from "../../../common/utils/thunk-try-catch.ts";
+import {handleServerAppError} from "../../../common/utils/handle-server-app-error.ts";
 
 const fetchBooks = createAppAsyncThunk<BooksDomainType, getBooksArgType>(
     "books/fetchBooks",
     async (arg, thunkAPI) => {
+        const { dispatch, rejectWithValue } = thunkAPI;
         return thunkTryCatch(thunkAPI, async () => {
             const res = await headerApi.getBooks(arg);
-            console.log(res.data)
-            return {totalItems: res.data.totalItems, items: res.data.items, startIndex: arg.startIndex};
+            console.log(res)
+            if (res.request.status === 200) {
+                return {totalItems: res.data.totalItems, items: res.data.items, startIndex: arg.startIndex};
+
+            }
+            else {
+                handleServerAppError(res.data, dispatch);
+                return rejectWithValue(null);
+            }
         });
     },
 );

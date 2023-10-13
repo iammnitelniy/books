@@ -14,7 +14,7 @@ export const StyledLinearLoader = styled.div`
     position: absolute;
     width: 0;
     height: 100%;
-    background-color: #8B4513;
+    background-color: #0a0909;
     animation: loading 2s linear infinite;
   }
 

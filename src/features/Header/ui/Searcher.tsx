@@ -3,6 +3,7 @@ import {ChangeEvent, FC, KeyboardEvent} from "react";
 import {headerThunks} from "../model/bookSearch.slice.ts";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch.ts";
 import {BooksSortsType, CategoriesType} from "../../Books/ui/Books.tsx";
+import {ButtonUniversal} from "../../../common/components/ButtonUniversal.tsx";
 
 type PropsType = {
     setSearch: (search: string) => void
@@ -19,7 +20,7 @@ const onButtonSearchDispatch = () => {
     dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: 'all', order: "relevance"}))
     setSortBy('relevance')
     setCategory('all')
-    setSearch('')
+
 }
 
     const searchBook = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -41,9 +42,8 @@ const onButtonSearchDispatch = () => {
                 }
                 onKeyDown={searchBook}
             />
-            <button onClick={()=> {onButtonSearchDispatch()}}>
-               Search
-            </button>
+            <ButtonUniversal disabled={!search} callBack={()=> {onButtonSearchDispatch()}} name={'Search'}/>
+
 
         </Search>
     );

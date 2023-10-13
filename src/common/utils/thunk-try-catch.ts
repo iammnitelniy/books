@@ -1,6 +1,6 @@
 import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
 import {AppDispatch, AppRootStateType} from "../../app/store.ts";
-import {BaseResponseType} from "../types";
+;
 
 
 export const thunkTryCatch = async <T>(

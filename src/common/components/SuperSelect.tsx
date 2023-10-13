@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {CustomSelect} from "../styles/StyledComponents.tsx";
 type OptionType = {
     value: string
     label: string
@@ -13,9 +14,14 @@ export const SuperSelect: React.FC<SuperSelectPropsType> = ({options, callBack, 
             callBack(e.currentTarget.value)
     }
     return (
-        <select value={value}  onChange={onChangeHandler}>
-            {options.map((el, index)=><option key={index} value={el.value}>{el.label}</option>)}
-        </select>
+        <CustomSelect value={value} onChange={onChangeHandler}>
+            {options.map((el, index) => (
+                <option key={index} value={el.value}>
+                    {el.label}
+                </option>
+            ))}
+        </CustomSelect>
+
     );
 };
 

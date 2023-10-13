@@ -1,23 +1,23 @@
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 
-export const GlobalStyles = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Poppins:wght@300&display=swap");
-
+export const GlobalStyle = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif;
-
+    background-color: whitesmoke;
+    
   }
 
   :root {
-    --primary-color: #755139ff;
-    --secondary-color: #d4b996ff;
+    --primary-color: #A9A9A9;
+    --secondary-color: #0a0909;
   }
-
 `;
+
+
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -25,18 +25,28 @@ export const HeaderContainer = styled.div`
   height: 600px;
   justify-content: center;
   align-content: flex-start;
+  @media(max-width: 578px) {
+    height: 800px;
+  }
+
+  
+  
 `
 export const SelectContainer = styled.div`
-  height: 10vh;
+  height: 60vh;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
+ 
+  
+  
+  
 `
 export const StyledHeader = styled.header`
   width: 100%;
-  height: 50vh;
+  max-height: 100%;
   background-color: var(--primary-color);
   color: var(--secondary-color);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
@@ -49,14 +59,18 @@ export const StyledHeader = styled.header`
 
 
 
+
 `;
 
 export const Row2 = styled.div`
+  background-color: var(--primary-color);
+  
   top: 10px;
   right: 150px;
   text-align: center;
 
   h2 {
+    background-color: var(--primary-color);
     font-size: 3rem;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -69,7 +83,11 @@ export const Row2 = styled.div`
 `;
 
 export const Row1 = styled.div`
+  background-color: var(--primary-color);
+  
   h1 {
+    background-color: var(--primary-color);
+    
     font-size: 3rem;
     text-align: center;
     margin-left: 35px;
@@ -82,23 +100,37 @@ export const Search = styled.div`
   align-items: center;
   justify-content: center;
 
+
   input {
     outline: 0;
     border: 0;
-    padding: 0 0.5rem;
+    padding: 0.5em;
     font-size: 15px;
     font-weight: bold;
+    margin: 0.5em;
+    
   }
 
   button {
-    background-color: #535bf2;
+   
     outline: none;
     border: none;
     padding: 0 0.5rem;
   }
 `;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ button {
+   
+ }
+`;
+
 export const Container = styled.div`
-  margin-top: 30px;
+  margin-top: 5px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2em;
@@ -113,10 +145,11 @@ export const CardStyle = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #e9e9e9;
+  background-color: whitesmoke;
   padding: 2em;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  cursor: pointer;
+  color: var(--secondary-color);
 
 
   &:hover {
@@ -129,7 +162,15 @@ export const CardStyle = styled.div`
     max-height: 200px;
   }
 
+  .cardBox {
+
+
+
+  }
+  
   .bottom {
+ 
+    
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -139,7 +180,7 @@ export const CardStyle = styled.div`
 
     .title {
       margin-bottom: 15px;
-      font-size: 20px; /* Уменьшил размер шрифта заголовка */
+      font-size: 20px; 
       font-weight: 600;
     }
   }
@@ -152,14 +193,14 @@ export const Overlay = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  color: var(--secondary-color);
   display: flex;
   align-items: center;
   justify-content: center;
+  
 `;
 
 export const OverlayInner = styled.div`
-  background: white;
   width: 100%;
   max-width: 700px;
   height: 100%;
@@ -169,6 +210,8 @@ export const OverlayInner = styled.div`
   box-sizing: border-box;
   overflow-y: auto;
   font-size: 1.3rem;
+ 
+
 
   .close {
     position: absolute;
@@ -238,4 +281,35 @@ export const CloseButton: React.FC<{ onClick: () => void }> = ({onClick}) => {
         <CloseIcon icon={faTimes} onClick={onClick}/>
     );
 };
+
+export const CustomSelect = styled.select`
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border: 1px solid var(--primary-color);
+  background-color: transparent; 
+  color: var(--secondary-color);
+  border-radius: 4px; 
+  appearance: none; 
+ 
+`;
+
+export const CustomButton = styled.button`
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0.2em;
+  @media (max-width: 800px) {
+    padding: 8px 16px;
+    font-size: 14px; 
+  }
+  &:hover {
+    filter: brightness(0.6);
+
+  }
+`;
 
