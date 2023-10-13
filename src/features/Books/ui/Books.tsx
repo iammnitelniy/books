@@ -31,12 +31,12 @@ export const Books = () => {
 
     const onChangeSelectCategoryHandler = (value: string) => {
         setCategory(value as CategoriesType)
-       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: sortBy}))
+       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: value, order: sortBy}))
 
     }
     const onChangeSortHandler = (value: string) => {
         setSortby(value as BooksSortsType)
-       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: sortBy as BooksSortsType}))
+       dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: category, order: value as BooksSortsType}))
 
     }
 
