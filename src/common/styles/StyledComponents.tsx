@@ -312,4 +312,9 @@ export const CustomButton = styled.button`
 
   }
 `;
+export const ErrorText = styled.div`
+  color: red;
+  font-size: 10px;
+  margin: 0.5em;
+`;
 

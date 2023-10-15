@@ -1,5 +1,5 @@
-import {Search} from "../../../common/styles/StyledComponents.tsx";
-import {ChangeEvent, FC, KeyboardEvent} from "react";
+import {ErrorText, Search} from "../../../common/styles/StyledComponents.tsx";
+import {ChangeEvent, FC, KeyboardEvent, useState} from "react";
 import {headerThunks} from "../model/bookSearch.slice.ts";
 import {useAppDispatch} from "../../../common/hooks/useAppDispatch.ts";
 import {BooksSortsType, CategoriesType} from "../../Books/ui/Books.tsx";
@@ -15,6 +15,8 @@ type PropsType = {
 export const Searcher: FC<PropsType> = ({search, setSearch, setSortBy, setCategory}) => {
 
     const dispatch = useAppDispatch();
+    const [error, setError] = useState<string>('');
+
 
 const onButtonSearchDispatch = () => {
     dispatch(headerThunks.fetchBooks({search, maxResults: '30', startIndex: '0', filter: 'all', order: "relevance"}))
@@ -23,11 +25,22 @@ const onButtonSearchDispatch = () => {
 
 }
 
-    const searchBook = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
 
-            onButtonSearchDispatch()
+    const handleChange = (e: KeyboardEvent<HTMLInputElement>) => {
+        const inputValue = e.currentTarget.value
+        setSearch(inputValue);
 
+        if (inputValue.trim() === '') {
+            setError('Not only spaces');
+        } else if (inputValue.length > 20) {
+            setError('Text should be less 20 sym');
+        } else {
+            setError('');
+            if (e.key === "Enter") {
+
+                onButtonSearchDispatch()
+
+            }
         }
     };
 
@@ -40,10 +53,10 @@ const onButtonSearchDispatch = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setSearch(e.target.value)
                 }
-                onKeyDown={searchBook}
+                onKeyDown={handleChange}
             />
-            <ButtonUniversal disabled={!search} callBack={()=> {onButtonSearchDispatch()}} name={'Search'}/>
-
+            <ButtonUniversal disabled={!search || error !== ''} callBack={()=> {onButtonSearchDispatch()}} name={'Search'}/>
+            {error && <ErrorText>{error}</ErrorText>}
 
         </Search>
     );

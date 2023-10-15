@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { ActionCreatorsMapObject, bindActionCreators } from "@reduxjs/toolkit";
-import { useAppDispatch } from "common/hooks/useAppDispatch";
+import {useAppDispatch} from "./useAppDispatch.ts";
+
 
 
 export const useActions = <T extends ActionCreatorsMapObject>(actions: T) => {
@@ -15,7 +16,7 @@ type ActionCreatorResponse<T extends (...args: any[]) => any> = ReturnType<Retur
 type ReplaceReturnType<T, TNewReturn> = T extends (...args: any[]) => infer R
   ? IsValidArg<Extract<T, (...args: any[]) => any>> extends true
     ? (...args: Parameters<Extract<T, (...args: any[]) => any>>) => TNewReturn
-    : () => TNewReturn
+    : (arg0: R) => TNewReturn
   : never;
 
 type RemapActionCreators<T extends ActionCreatorsMapObject> = {
